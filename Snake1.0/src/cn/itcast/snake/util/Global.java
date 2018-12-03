@@ -27,6 +27,9 @@ import java.util.Properties;
  * 
  */
 public class Global {
+	
+	public static int score;
+	public static int scorecheck = 0;
 
 	private static Properties properties = new Properties();
 

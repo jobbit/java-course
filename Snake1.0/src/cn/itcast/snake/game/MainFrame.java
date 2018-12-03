@@ -291,8 +291,7 @@ public class MainFrame extends JFrame implements GameListener {
 		optionPanel.getRadioButton_map1().setFocusable(false);
 		optionPanel.getRadioButton_map2().setFocusable(false);
 
-		this
-				.setSize(
+		this.setSize(
 						subPanel.getSize().width > optionPanel.getSize().width ? gamePanel
 								.getSize().width
 								+ 2 * left + 8

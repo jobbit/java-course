@@ -17,6 +17,7 @@ public interface SnakeListener {
 
 	/**
 	 * 蛇吃到食物事件
+	 * @return 
 	 */
 	void snakeEatFood();
 }

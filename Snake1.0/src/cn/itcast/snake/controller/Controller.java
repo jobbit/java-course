@@ -152,6 +152,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 		/* 判断是否吃到食物 */
 		if (food != null && food.isSnakeEatFood(snake)) {
 			/* 吃到食物后, 蛇增加身体, 再重新丢一个食物 */
+			Global.scorecheck = 1;
 			snake.eatFood();
 			food.setLocation(ground == null ? food.getNew() : ground
 					.getFreePoint());
@@ -324,12 +325,20 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	/**
 	 * 处理蛇吃到食物后触发的 snakeEatFood事件, 但什么也没做<BR>
 	 * 可以覆盖这个方法增加功能, 例如, 增加记分功能
+	 * @return 
+	 * @return 
 	 */
 	public void snakeEatFood() {
-		// TODO Auto-generated method stub
+		Global.score = Global.score + 10;
+		updatescore();
+		System.out.println(String.valueOf(Global.score));
 		System.out.println("吃到食物!");
 	}
-
+	
+	public void updatescore() {
+		
+	}
+	
 	public GamePanel getGamePanel() {
 		return gamePanel;
 	}

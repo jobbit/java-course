@@ -16,7 +16,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import cn.itcast.snake.controller.Controller;
 import cn.itcast.snake.entities.Snake;
+import cn.itcast.snake.util.Global;
 
 /**
  * 游戏的设置项面板
@@ -61,7 +63,10 @@ public class GameOptionPanel extends JPanel {
 	 * Create the panel
 	 */
 	public GameOptionPanel() {
-		super();
+		
+		
+		
+		super();		
 		setSize(450, 185);
 		setLayout(null);
 		setBorder(new EtchedBorder(EtchedBorder.LOWERED));
@@ -186,14 +191,6 @@ public class GameOptionPanel extends JPanel {
 		label_score.setBounds(10, 10, 101, 15);
 		separator_2.add(label_score);
 		
-		final JLabel label_score1 = new JLabel();
-		label_score1.setFont(new Font("宋体", Font.PLAIN, 12));
-		label_score1.setText("233333");
-
-		label_score1.setText(String.valueOf(Snake.getLength()));
-		label_score1.setBounds(80, 10, 101, 15);
-		separator_2.add(label_score1);
-
 //		final JLabel label_logo = new JLabel(czbkIcon);
 //		label_logo.setBounds(10, 10, 125, 50);
 //		separator_2.add(label_logo);
@@ -215,8 +212,24 @@ public class GameOptionPanel extends JPanel {
 		button_default.setFocusable(false);
 		separator_3.add(button_default);
 		
-	}
+		final JLabel label_score1 = new JLabel();
+		label_score1.setFont(new Font("宋体", Font.PLAIN, 12));
+		label_score1.setText(String.valueOf(Global.score));
+		label_score1.setBounds(80, 10, 101, 15);
+		separator_2.add(label_score1);
+		
+		
+		while(Global.scorecheck==1) {
+			repaint();
+			final JLabel label_score2 = new JLabel();
+			label_score2.setFont(new Font("宋体", Font.PLAIN, 12));
+			label_score2.setText(String.valueOf(Global.score));
+			label_score2.setBounds(80, 10, 101, 15);
+			separator_2.add(label_score2);
+			Global.scorecheck=0;
+		}
 
+	}
 	public JFrame getFrame() {
 		return frame;
 	}
