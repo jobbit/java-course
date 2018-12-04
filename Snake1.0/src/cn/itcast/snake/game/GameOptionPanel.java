@@ -62,6 +62,9 @@ public class GameOptionPanel extends JPanel {
 	/**
 	 * Create the panel
 	 */
+	
+	final static JSeparator separator_2 = new JSeparator();
+
 	public GameOptionPanel() {
 		
 		
@@ -157,7 +160,6 @@ public class GameOptionPanel extends JPanel {
 		button_bodyColor.setFocusable(false);
 		button_bodyColor.setText("设置蛇身颜色");
 
-		final JSeparator separator_2 = new JSeparator();
 		separator_2.setOrientation(SwingConstants.VERTICAL);
 		separator_2.setBounds(302, 10, 140, 165);
 		add(separator_2);
@@ -221,14 +223,22 @@ public class GameOptionPanel extends JPanel {
 		
 		while(Global.scorecheck==1) {
 			repaint();
-			final JLabel label_score2 = new JLabel();
-			label_score2.setFont(new Font("宋体", Font.PLAIN, 12));
-			label_score2.setText(String.valueOf(Global.score));
-			label_score2.setBounds(80, 10, 101, 15);
-			separator_2.add(label_score2);
+//			final JLabel label_score2 = new JLabel();
+//			label_score2.setFont(new Font("宋体", Font.PLAIN, 12));
+//			label_score2.setText(String.valueOf(Global.score));
+//			label_score2.setBounds(80, 10, 101, 15);
+			separator_2.add(label_score1);
 			Global.scorecheck=0;
 		}
 
+	}
+	
+	public static void updatescore() {
+		final JLabel label_score2 = new JLabel();
+		label_score2.setFont(new Font("宋体", Font.PLAIN, 12));
+		label_score2.setText(String.valueOf(Global.score));
+		label_score2.setBounds(80, 10, 101, 15);
+		separator_2.add(label_score2);
 	}
 	public JFrame getFrame() {
 		return frame;

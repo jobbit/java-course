@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import cn.itcast.snake.entities.Food;
 import cn.itcast.snake.entities.Ground;
 import cn.itcast.snake.entities.Snake;
+import cn.itcast.snake.game.GameOptionPanel;
 import cn.itcast.snake.listener.GameListener;
 import cn.itcast.snake.listener.SnakeListener;
 import cn.itcast.snake.util.Global;
@@ -23,7 +24,7 @@ import cn.itcast.snake.view.GamePanel;
  * 处理按键事件<BR>
  * <BR>
  * 实现了SnakeListener接口, 可以处理Snake 触发的事件<BR>
- * 方法 snakeEatFood() 处理蛇吃到食物后触发的 snakeEatFood事件 但什么也没做<BR>
+ * 方法 snakeEatFood() 处理蛇吃到食物后触发的 snakeEatFood事件 分数的增加<BR>
  * <BR>
  * 
  * @version 1.0, 01/01/08
@@ -330,7 +331,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	 */
 	public void snakeEatFood() {
 		Global.score = Global.score + 10;
-		updatescore();
+		GameOptionPanel.updatescore();
 		System.out.println(String.valueOf(Global.score));
 		System.out.println("吃到食物!");
 	}
