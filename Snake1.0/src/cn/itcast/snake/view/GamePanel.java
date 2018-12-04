@@ -10,6 +10,7 @@ import javax.swing.border.EtchedBorder;
 import cn.itcast.snake.entities.Food;
 import cn.itcast.snake.entities.Ground;
 import cn.itcast.snake.entities.Snake;
+import cn.itcast.snake.game.GameOptionPanel;
 import cn.itcast.snake.util.Global;
 
 /**
@@ -61,6 +62,7 @@ public class GamePanel extends JPanel {
 				og = oimg.getGraphics();
 		}
 		if (og != null) {
+			GameOptionPanel.updatescore();
 			og.setColor(backgroundColor);
 			og.fillRect(0, 0, Global.WIDTH * Global.CELL_WIDTH, Global.HEIGHT
 					* Global.CELL_HEIGHT);

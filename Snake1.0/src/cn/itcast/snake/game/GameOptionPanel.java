@@ -214,27 +214,27 @@ public class GameOptionPanel extends JPanel {
 		button_default.setFocusable(false);
 		separator_3.add(button_default);
 		
-		final JLabel label_score1 = new JLabel();
-		label_score1.setFont(new Font("宋体", Font.PLAIN, 12));
-		label_score1.setText(String.valueOf(Global.score));
-		label_score1.setBounds(80, 10, 101, 15);
-		separator_2.add(label_score1);
+//		final JLabel label_score1 = new JLabel();
+//		label_score1.setFont(new Font("宋体", Font.PLAIN, 12));
+//		label_score1.setText(String.valueOf(Global.score));
+//		label_score1.setBounds(80, 10, 101, 15);
+//		separator_2.add(label_score1);
 		
 		
-		while(Global.scorecheck==1) {
-			repaint();
+//		while(Global.scorecheck==1) {
+//			repaint();
 //			final JLabel label_score2 = new JLabel();
 //			label_score2.setFont(new Font("宋体", Font.PLAIN, 12));
 //			label_score2.setText(String.valueOf(Global.score));
 //			label_score2.setBounds(80, 10, 101, 15);
-			separator_2.add(label_score1);
-			Global.scorecheck=0;
-		}
+//			separator_2.add(label_score1);
+//			Global.scorecheck=0;
+//		}
 
 	}
 	
+	final static JLabel label_score2 = new JLabel();
 	public static void updatescore() {
-		final JLabel label_score2 = new JLabel();
 		label_score2.setFont(new Font("宋体", Font.PLAIN, 12));
 		label_score2.setText(String.valueOf(Global.score));
 		label_score2.setBounds(80, 10, 101, 15);

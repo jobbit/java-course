@@ -115,20 +115,20 @@ public class Global {
 	 * 初始化常量
 	 */
 	static {
-		InputStream inputStream = null;
-		try {
-			inputStream = new FileInputStream(CONFIG_FILE);
-			properties.load(inputStream);
-		} catch (Exception e) {
-			System.out.println("没有配置文件");
-		} finally {
-			try {
-				if (inputStream != null)
-					inputStream.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		InputStream inputStream = null;
+//		try {
+//			inputStream = new FileInputStream(CONFIG_FILE);
+//			properties.load(inputStream);
+//		} catch (Exception e) {
+//			System.out.println("没有配置文件");
+//		} finally {
+//			try {
+//				if (inputStream != null)
+//					inputStream.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		Integer temp = null;
 		/* 没有设置或设置的无效时要有一个默认值 */
 		WIDTH = (temp = getIntValue("width")) != null && temp <= 80

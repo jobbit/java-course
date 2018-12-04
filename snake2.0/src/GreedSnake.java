@@ -7,7 +7,6 @@ public class GreedSnake {
          SnakeView view = new SnakeView(model,control);
         //添加一个观察者，让view成为model的观察者
         model.addObserver(view);
- +
         (new Thread(model)).start();
 
      }
