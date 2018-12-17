@@ -31,18 +31,13 @@ import cn.itcast.snake.util.Global;
 import cn.itcast.snake.view.GamePanel;
 
 /**
- * 控制器<BR>
- * 控制Ground, Snake, Food<BR>
- * 负责游戏的逻辑<BR>
- * 处理按键事件<BR>
- * <BR>
- * 实现了SnakeListener接口, 可以处理Snake 触发的事件<BR>
- * 方法 snakeEatFood() 处理蛇吃到食物后触发的 snakeEatFood事件 分数的增加<BR>
- * <BR>
  * 
- * @version 1.0, 01/01/08
- * 
- * @author 汤阳光
+ * 控制器
+ * 控制Ground, Snake, Food
+ * 负责游戏的逻辑
+ * 处理按键事件
+ * 实现了SnakeListener接口, 可以处理Snake 触发的事件
+ * 方法 snakeEatFood() 处理蛇吃到食物后触发的 snakeEatFood事件 分数的增加
  * 
  */
 public class Controller extends KeyAdapter implements SnakeListener {
@@ -249,7 +244,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	public void stopGame() throws FileNotFoundException, IOException {
 		if (playing) {
 			playing = false;
-			File file = new File("C:/Users/ZHU/DesktopHighScore.txt");//打开txt
+			File file = new File("D:/HighScore.txt");//打开txt
 			int i=0;
 			int j=0;
 			if(!file.exists()){

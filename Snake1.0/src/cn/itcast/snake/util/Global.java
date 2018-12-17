@@ -21,10 +21,6 @@ import java.util.Properties;
  * 每个配置项都有设置值范围, 超出范围(无效)的设置值将不起作用<BR>
  * 设置值的范围请参见字段的注释<BR>
  * 
- * @version 1.0, 01/01/08
- * 
- * @author 汤阳光
- * 
  */
 public class Global {
 	

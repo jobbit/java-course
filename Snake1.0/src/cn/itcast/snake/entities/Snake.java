@@ -13,22 +13,15 @@ import cn.itcast.snake.util.Global;
 
 /**
  * 
- * 蛇<BR>
- * move()方法默认支持走到边以后从另一边出现<BR>
- * <BR>
- * 可以用setHeadColor(), 和 setBodyColor() 方法更改蛇头或蛇身体的颜色<BR>
- * <BR>
+ * 蛇
+ * move()方法默认支持走到边以后从另一边出现
+ * 可以用setHeadColor(), 和 setBodyColor() 方法更改蛇头或蛇身体的颜色
  * 也可以通过覆盖 drawHead(Graphics, int, int, int, int) 方法 改变蛇头的显示方式 和覆盖
- * drawBody(Graphics, int, int, int, int) 方法 改变蛇身体的显示方式<BR>
- * <BR>
- * 用内部类MoveDriver 驱动蛇定时移动<BR>
- * begin() 方法内部开启一个新的线程驱动蛇定时移动, 调用这个方法的时候要注意<BR>
+ * drawBody(Graphics, int, int, int, int) 方法 改变蛇身体的显示方式
+ * 用内部类MoveDriver 驱动蛇定时移动
+ * begin() 方法内部开启一个新的线程驱动蛇定时移动, 调用这个方法的时候要注意
  * 
  * 蛇的身体的初始长度必须大于等于2
- * 
- * @version 1.0, 01/01/08
- * 
- * @author 汤阳光
  * 
  */
 public class Snake {

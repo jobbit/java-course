@@ -15,12 +15,9 @@ import cn.itcast.snake.game.GameOptionPanel;
 import cn.itcast.snake.util.Global;
 
 /**
+ * 
  * 游戏的显示界面<BR>
  * 可以用 setBackgroundColor() 设置游戏的背景色
- * 
- * @version 1.0, 01/01/08
- * 
- * @author 汤阳光
  * 
  */
 public class GamePanel extends JPanel {

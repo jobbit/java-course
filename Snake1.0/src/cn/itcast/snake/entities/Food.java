@@ -9,13 +9,9 @@ import cn.itcast.snake.util.Global;
 
 /**
  * 
- * 食物, 有x , y 坐标 和 颜色等属性<BR>
- * 可以用setColor() 改变食物的颜色<BR>
- * 也可以通过覆盖 drawFood(Graphics, int, int, int, int) 方法 改变食物的显示方式<BR>
- * 
- * @version 1.0, 01/01/08
- * 
- * @author 汤阳光
+ * 食物, 有x , y 坐标 和 颜色等属性
+ * 可以用setColor() 改变食物的颜色
+ * 也可以通过覆盖 drawFood(Graphics, int, int, int, int) 方法 改变食物的显示方式
  * 
  */
 public class Food extends Point {

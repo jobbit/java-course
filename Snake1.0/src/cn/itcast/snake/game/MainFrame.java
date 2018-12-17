@@ -28,11 +28,8 @@ import cn.itcast.snake.util.Global;
 import cn.itcast.snake.view.GamePanel;
 
 /**
+ * 
  * 主界面, 实现了 GameListener 接口
- * 
- * @version 1.0, 01/01/08
- * 
- * @author 汤阳光
  * 
  */
 public class MainFrame extends JFrame implements GameListener {

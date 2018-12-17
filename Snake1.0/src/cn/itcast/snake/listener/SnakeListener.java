@@ -1,12 +1,8 @@
 package cn.itcast.snake.listener;
 
 /**
- * 
+ *
  * ÉßµÄ¼àÌıÆ÷
- * 
- * @version 1.0, 01/01/08
- * 
- * @author ÌÀÑô¹â
  * 
  */
 public interface SnakeListener {

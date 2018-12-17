@@ -8,30 +8,21 @@ import java.util.Random;
 import cn.itcast.snake.util.Global;
 
 /**
- * 可以叫做地形, 或地面<BR>
- * <BR>
- * 可以通过setRockColor(), setGriddingColor()方法更改石头或网格的颜色<BR>
- * 通过setDrawGridding() 方法设置是否画网格<BR>
- * <BR>
- * 可以覆盖 drawRock(Graphics, int, int, int, int) 方法以改变石头的显示方式<BR>
- * <BR>
- * 可以通过覆盖genernateRocks() 方法改变石头产生的布局<BR>
- * 覆盖此方法时, 请使用addRock(int,int) 方法在指定的坐标添加石头<BR>
- * <BR>
- * 这个类提供了两种石头的布局<BR>
- * 默认是使用第一种, 即一圈石头<BR>
- * 如果想使用第二种, 则应该使用如下代码:<BR>
- * <code><BR>
- Ground ground = new Ground();<BR>
- // 清空石头<BR>
- ground.init();<BR>
- // 使用提供的第二种石头的布局 <BR>
- ground.generateRocks2();<BR>
- </code> <BR>
  * 
- * @version 1.0, 01/01/08
- * 
- * @author 汤阳光
+ * 可以叫做地形, 或地面
+ * 可以通过setRockColor(), setGriddingColor()方法更改石头或网格的颜色
+ * 通过setDrawGridding() 方法设置是否画网格
+ * 可以覆盖 drawRock(Graphics, int, int, int, int) 方法以改变石头的显示方式
+ * 可以通过覆盖genernateRocks() 方法改变石头产生的布局
+ * 覆盖此方法时, 请使用addRock(int,int) 方法在指定的坐标添加石头
+ * 这个类提供了两种石头的布局
+ * 默认是使用第一种, 即一圈石头
+ * 如果想使用第二种, 则应该使用如下代码:
+ *Ground ground = new Ground();// 清空石头
+ *
+ *ground.init();// 使用提供的第二种石头的布局 
+ *
+ *ground.generateRocks2();
  * 
  */
 public class Ground {
