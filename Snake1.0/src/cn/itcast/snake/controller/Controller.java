@@ -171,15 +171,10 @@ public class Controller extends KeyAdapter implements SnakeListener {
 			Global.scorecheck = 1;
 			snake.eatFood();
 			Random random = new Random();
-			if(random.nextInt(100)+1 <= 30) {
 				speedfood.setLocation(ground == null ? speedfood.getNew() : ground
 						.getFreePoint());
-			}
-			else {
 				food.setLocation(ground == null ? food.getNew() : ground
 					.getFreePoint());
-			}
-			
 
 		}/* 如果吃到食物, 就肯定不会吃到石头 */
 		else if (ground != null && ground.isSnakeEatRock(snake)) {
@@ -200,14 +195,10 @@ public class Controller extends KeyAdapter implements SnakeListener {
 			snake.eatSpeedFood();
 			snake.setSpeed(25);
 			Random random = new Random();
-			if(random.nextInt(100)+1 <= 30) {
 				speedfood.setLocation(ground == null ? speedfood.getNew() : ground
 						.getFreePoint());
-			}
-			else {
 				food.setLocation(ground == null ? food.getNew() : ground
 					.getFreePoint());
-			}
 			
 		}
 		if (snake.isEatBody())
@@ -382,9 +373,9 @@ public class Controller extends KeyAdapter implements SnakeListener {
 		/* 先丢一个食物 */
 		if (ground != null && food != null)
 			food.setLocation(ground.getFreePoint());
-//		/* 先丢一个食物 */
-//		if (ground != null && speedfood != null)
-//			speedfood.setLocation(ground.getFreePoint());
+		/* 先丢一个速度食物 */
+		if (ground != null && speedfood != null)
+			speedfood.setLocation(ground.getFreePoint());
 		/* 注册监听器 */
 		this.snake.addSnakeListener(this);
 	}
@@ -475,7 +466,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	 * @return 
 	 */
 	public void snakeEatFood() {
-		Global.score = Global.score + 10;
+		Global.score = Global.score + (1000/Global.SPEED);
 		GameOptionPanel.updatescore();
 		GameOptionPanel.updatehighscore();
 		System.out.println(String.valueOf(Global.score));
