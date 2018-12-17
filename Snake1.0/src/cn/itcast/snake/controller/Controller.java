@@ -154,7 +154,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 
 		/* 重新显示 */
 		if (gamePanel != null)
-			gamePanel.redisplay(ground, snake, food);
+			gamePanel.redisplay(ground, snake, food, speedfood);
 		/* 更新提示 */
 		if (gameInfoLabel != null)
 			gameInfoLabel.setText(getNewInfo());
@@ -194,7 +194,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 						e.printStackTrace();
 					}
 
-		}
+		}/*如果吃到加速食物 速度加为最快*/
 		else if (speedfood != null && speedfood.isSnakeEatSpeedFood(snake)) {
 			Global.scorecheck = 1;
 			snake.eatSpeedFood();
@@ -222,7 +222,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 			}
 		
 		if (gamePanel != null)
-			gamePanel.redisplay(ground, snake, food);
+			gamePanel.redisplay(ground, snake, food, speedfood);
 		/* 更新提示 */
 		if (gameInfoLabel != null)
 			gameInfoLabel.setText(getNewInfo());
@@ -258,7 +258,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	public void stopGame() throws FileNotFoundException, IOException {
 		if (playing) {
 			playing = false;
-			File file = new File("D:/HighScore.txt");//打开txt
+			File file = new File("C:/Users/ZHU/DesktopHighScore.txt");//打开txt
 			int i=0;
 			int j=0;
 			if(!file.exists()){
@@ -373,14 +373,18 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	 * @param food
 	 * @param ground
 	 */
-	public Controller(Snake snake, Food food, Ground ground, GamePanel gamePanel) {
+	public Controller(Snake snake, Food food, SpeedFood speedfood,Ground ground, GamePanel gamePanel) {
 		this.snake = snake;
 		this.food = food;
+		this.speedfood = speedfood;
 		this.ground = ground;
 		this.gamePanel = gamePanel;
 		/* 先丢一个食物 */
 		if (ground != null && food != null)
 			food.setLocation(ground.getFreePoint());
+//		/* 先丢一个食物 */
+//		if (ground != null && speedfood != null)
+//			speedfood.setLocation(ground.getFreePoint());
 		/* 注册监听器 */
 		this.snake.addSnakeListener(this);
 	}
@@ -393,10 +397,10 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	 * @param ground
 	 * @param gameInfoLabel
 	 */
-	public Controller(Snake snake, Food food, Ground ground,
+	public Controller(Snake snake, Food food, SpeedFood speedfood,Ground ground,
 			GamePanel gamePanel, JLabel gameInfoLabel) {
 
-		this(snake, food, ground, gamePanel);
+		this(snake, food, speedfood,ground, gamePanel);
 		this.setGameInfoLabel(gameInfoLabel);
 
 		if (gameInfoLabel != null)

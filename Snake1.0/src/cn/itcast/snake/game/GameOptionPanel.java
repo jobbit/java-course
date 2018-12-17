@@ -247,7 +247,7 @@ public class GameOptionPanel extends JPanel {
 	final static JLabel label_score3 = new JLabel();
 	public static void updatehighscore(){
 		label_score3.setFont(new Font("宋体", Font.PLAIN, 12));
-		File file = new File("D:/HighScore.txt");//打开txt
+		File file = new File("C:/Users/ZHU/DesktopHighScore.txt");//打开txt
 		int i=0;
 		int j=0;
 		if(!file.exists()){

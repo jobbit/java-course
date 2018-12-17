@@ -22,6 +22,7 @@ import cn.itcast.snake.controller.Controller;
 import cn.itcast.snake.entities.Food;
 import cn.itcast.snake.entities.Ground;
 import cn.itcast.snake.entities.Snake;
+import cn.itcast.snake.entities.SpeedFood;
 import cn.itcast.snake.listener.GameListener;
 import cn.itcast.snake.util.Global;
 import cn.itcast.snake.view.GamePanel;
@@ -49,7 +50,7 @@ public class MainFrame extends JFrame implements GameListener {
 	public static void main(String args[]) {
 		try {
 			MainFrame frame = new MainFrame(new Controller(new Snake(),
-					new Food(), new Ground(), new GamePanel(), new JLabel()));
+					new Food(), new SpeedFood(), new Ground(), new GamePanel(), new JLabel()));
 			frame.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
