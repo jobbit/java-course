@@ -91,7 +91,7 @@ public class Global {
 	 * 范围10 至 无限大<BR>
 	 * 缺省值为 200
 	 */
-	public static int SPEED;
+	public static final int SPEED;
 
 	/**
 	 * 蛇每次加速或减速的幅度 (单位: 毫秒/格)<BR>

@@ -466,7 +466,9 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	 * @return 
 	 */
 	public void snakeEatFood() {
-		Global.score = Global.score + (1000/Global.SPEED);
+		Global.score = Global.score + (1000/snake.getSpeed());
+		System.out.println(1000/snake.getSpeed());
+		System.out.println(String.valueOf(snake.getSpeed()));
 		GameOptionPanel.updatescore();
 		GameOptionPanel.updatehighscore();
 		System.out.println(String.valueOf(Global.score));
