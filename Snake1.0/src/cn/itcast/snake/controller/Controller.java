@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -171,12 +172,16 @@ public class Controller extends KeyAdapter implements SnakeListener {
 		}/* 如果吃到食物, 就肯定不会吃到石头 */
 		else if (ground != null && ground.isSnakeEatRock(snake)) {
 			/* 如果吃到的是石头, 或吃到自己的身体, 就让蛇死掉 */
-			try {
-				stopGame();
-			} catch (FileNotFoundException e) {
-				// TODO 自动生成的 catch 块
-				e.printStackTrace();
-			}
+					try {
+						stopGame();
+					} catch (FileNotFoundException e) {
+						// TODO 自动生成的 catch 块
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO 自动生成的 catch 块
+						e.printStackTrace();
+					}
+
 		}
 		if (snake.isEatBody())
 			try {
@@ -184,7 +189,11 @@ public class Controller extends KeyAdapter implements SnakeListener {
 			} catch (FileNotFoundException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
 			}
+		
 		if (gamePanel != null)
 			gamePanel.redisplay(ground, snake, food);
 		/* 更新提示 */
@@ -218,11 +227,12 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	/**
 	 * 结束游戏
 	 */
-	public void stopGame() throws FileNotFoundException {
+	public void stopGame() throws FileNotFoundException, IOException {
 		if (playing) {
 			playing = false;
-			File file = new File("D:/HighScore.txt");
+			File file = new File("D:/HighScore.txt");//打开txt
 			int i=0;
+			int j=0;
 			if(!file.exists()){
 				try {
 				file.createNewFile();
@@ -230,51 +240,74 @@ public class Controller extends KeyAdapter implements SnakeListener {
 				} catch (IOException e) {
 				e.printStackTrace();
 				}
-				}
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-			String s=null;
+				}//不存在则创建个新的
+			FileReader fr1 = new FileReader(file);   
+			BufferedReader br1 = new BufferedReader(fr1);   
+			String str2 = null;
 			try {
-				while((s = reader.readLine())!=null){
-				String[] stuInfo = s.split(",");
-				i =Integer.valueOf(stuInfo[0]);
-				}
-			} catch (NumberFormatException e) {
+				str2 = br1.readLine();
+			} catch (IOException e) {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
-			} catch (IOException f) {
+			}   
+			if (str2 != null) {   
+			    i = Integer.valueOf(str2);
+			}
+			
+			try {
+				br1.close();
+			} catch (IOException e) {
 				// TODO 自动生成的 catch 块
-				f.printStackTrace();
-			}
-			if(Global.score>=i){
-				FileWriter fileWriter = null;
+				e.printStackTrace();
+			}   
+			try {
+				fr1.close();
+			} catch (IOException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			} 
+			if(Global.score>i){
+				try {   
+					    file.delete(); //删除文件   
+					}   
+					catch (Exception e) {   
+					    System.out.println("删除文件夹操作出错");   
+					    e.printStackTrace();   
+					} 
 				try {
-					fileWriter = new FileWriter(file);
-				} catch (IOException e1) {
-					// TODO 自动生成的 catch 块
-					e1.printStackTrace();
-				}
-	            try {
-					fileWriter.write("");
-				} catch (IOException e) {
-					// TODO 自动生成的 catch 块
+					file.createNewFile();
+					writeDataToFile(file,Global.score);
+					} catch (IOException e) {
 					e.printStackTrace();
-				}
-	            try {
-					fileWriter.flush();
-				} catch (IOException e) {
-					// TODO 自动生成的 catch 块
-					e.printStackTrace();
-				}
-	            try {
-					fileWriter.close();
-				} catch (IOException e) {
-					// TODO 自动生成的 catch 块
-					e.printStackTrace();
-				}
-				writeDataToFile(file,Global.score);
+					}
 			}
+			FileReader fr2 = new FileReader(file);   
+			BufferedReader br2 = new BufferedReader(fr2);   
+			String str3 = null;
+			try {
+				str3 = br2.readLine();
+			} catch (IOException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}   
+			if (str3 != null) {   
+			    j = Integer.valueOf(str3);
+			}
+			
+			try {
+				br2.close();
+			} catch (IOException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}   
+			try {
+				fr2.close();
+			} catch (IOException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			} 
 			System.out.println("本局分："+Global.score);
-			System.out.println("最高分："+i);
+			System.out.println("最高分："+j);
 			snake.dead();
 			for (GameListener l : listeners)
 				l.gameOver();
@@ -412,6 +445,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	public void snakeEatFood() {
 		Global.score = Global.score + 10;
 		GameOptionPanel.updatescore();
+		GameOptionPanel.updatehighscore();
 		System.out.println(String.valueOf(Global.score));
 		System.out.println("吃到食物!");
 	}

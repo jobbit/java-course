@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -243,10 +245,11 @@ public class GameOptionPanel extends JPanel {
 	}
 	
 	final static JLabel label_score3 = new JLabel();
-	public static void updatehighscore() {
+	public static void updatehighscore(){
 		label_score3.setFont(new Font("宋体", Font.PLAIN, 12));
-		File file = new File("D:/HighScore.txt");
+		File file = new File("D:/HighScore.txt");//打开txt
 		int i=0;
+		int j=0;
 		if(!file.exists()){
 			try {
 			file.createNewFile();
@@ -254,28 +257,85 @@ public class GameOptionPanel extends JPanel {
 			} catch (IOException e) {
 			e.printStackTrace();
 			}
-			}
-		BufferedReader reader = null;
+			}//不存在则创建个新的
+		FileReader fr1 = null;
 		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			fr1 = new FileReader(file);
 		} catch (FileNotFoundException e1) {
 			// TODO 自动生成的 catch 块
 			e1.printStackTrace();
-		}
-		String s=null;
+		}   
+		BufferedReader br1 = new BufferedReader(fr1);   
+		String str2 = null;
 		try {
-			if((s = reader.readLine())!=null){
-			String[] stuInfo = s.split(",");
-			i =Integer.valueOf(stuInfo[0]);
-			}
-		} catch (NumberFormatException e) {
+			str2 = br1.readLine();
+		} catch (IOException e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
-		} catch (IOException f) {
-			// TODO 自动生成的 catch 块
-			f.printStackTrace();
+		}   
+		if (str2 != null) {   
+		    i = Integer.valueOf(str2);
 		}
-		label_score3.setText(String.valueOf(i));
+		
+		try {
+			br1.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}   
+		try {
+			fr1.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} 
+		if(Global.score>i){
+			try {   
+				    file.delete(); //删除文件   
+				}   
+				catch (Exception e) {   
+				    System.out.println("删除文件夹操作出错");   
+				    e.printStackTrace();   
+				} 
+			try {
+				file.createNewFile();
+				writeDataToFile(file,Global.score);
+				} catch (IOException e) {
+				e.printStackTrace();
+				}
+		}
+		FileReader fr2 = null;
+		try {
+			fr2 = new FileReader(file);
+		} catch (FileNotFoundException e1) {
+			// TODO 自动生成的 catch 块
+			e1.printStackTrace();
+		}   
+		BufferedReader br2 = new BufferedReader(fr2);   
+		String str3 = null;
+		try {
+			str3 = br2.readLine();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}   
+		if (str3 != null) {   
+		    j = Integer.valueOf(str3);
+		}
+		
+		try {
+			br2.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		}   
+		try {
+			fr2.close();
+		} catch (IOException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} 
+		label_score3.setText(String.valueOf(j));
 		label_score3.setBounds(80, 20, 101, 15);
 		separator_3.add(label_score3);
 	}
