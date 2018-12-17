@@ -244,7 +244,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	public void stopGame() throws FileNotFoundException, IOException {
 		if (playing) {
 			playing = false;
-			File file = new File("D:/HighScore.txt");//打开txt
+			File file = new File("C:/Users/ZHU/Desktop/HighScore.txt");//打开txt
 			int i=0;
 			int j=0;
 			if(!file.exists()){
