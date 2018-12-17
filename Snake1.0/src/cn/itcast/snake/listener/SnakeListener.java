@@ -20,4 +20,6 @@ public interface SnakeListener {
 	 * @return 
 	 */
 	void snakeEatFood();
+	
+	void snakeEatSpeedFood();
 }

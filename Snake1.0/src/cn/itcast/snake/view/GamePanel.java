@@ -10,6 +10,7 @@ import javax.swing.border.EtchedBorder;
 import cn.itcast.snake.entities.Food;
 import cn.itcast.snake.entities.Ground;
 import cn.itcast.snake.entities.Snake;
+import cn.itcast.snake.entities.SpeedFood;
 import cn.itcast.snake.game.GameOptionPanel;
 import cn.itcast.snake.util.Global;
 
@@ -53,7 +54,7 @@ public class GamePanel extends JPanel {
 	 * @param ground
 	 * @param snake
 	 */
-	public synchronized void redisplay(Ground ground, Snake snake, Food food) {
+	public synchronized void redisplay(Ground ground, Snake snake, Food food, SpeedFood speedfood) {
 
 		/* ÷ÿ–¬œ‘ æ */
 		if (og == null) {
@@ -72,6 +73,8 @@ public class GamePanel extends JPanel {
 			snake.drawMe(og);
 			if (food != null)
 				food.drawMe(og);
+			if (speedfood != null)
+				speedfood.drawMe(og);
 			this.paint(this.getGraphics());
 		}
 	}

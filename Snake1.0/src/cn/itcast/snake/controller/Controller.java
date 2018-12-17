@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 import javax.swing.JLabel;
@@ -22,6 +23,7 @@ import javax.swing.JLabel;
 import cn.itcast.snake.entities.Food;
 import cn.itcast.snake.entities.Ground;
 import cn.itcast.snake.entities.Snake;
+import cn.itcast.snake.entities.SpeedFood;
 import cn.itcast.snake.game.GameOptionPanel;
 import cn.itcast.snake.listener.GameListener;
 import cn.itcast.snake.listener.SnakeListener;
@@ -53,6 +55,8 @@ public class Controller extends KeyAdapter implements SnakeListener {
 
 	/* 食物 */
 	private Food food;
+	
+	private SpeedFood speedfood;
 
 	/* 显示 */
 	private GamePanel gamePanel;
@@ -166,8 +170,16 @@ public class Controller extends KeyAdapter implements SnakeListener {
 			/* 吃到食物后, 蛇增加身体, 再重新丢一个食物 */
 			Global.scorecheck = 1;
 			snake.eatFood();
-			food.setLocation(ground == null ? food.getNew() : ground
+			Random random = new Random();
+			if(random.nextInt(100)+1 <= 30) {
+				speedfood.setLocation(ground == null ? speedfood.getNew() : ground
+						.getFreePoint());
+			}
+			else {
+				food.setLocation(ground == null ? food.getNew() : ground
 					.getFreePoint());
+			}
+			
 
 		}/* 如果吃到食物, 就肯定不会吃到石头 */
 		else if (ground != null && ground.isSnakeEatRock(snake)) {
@@ -182,6 +194,21 @@ public class Controller extends KeyAdapter implements SnakeListener {
 						e.printStackTrace();
 					}
 
+		}
+		else if (speedfood != null && speedfood.isSnakeEatSpeedFood(snake)) {
+			Global.scorecheck = 1;
+			snake.eatSpeedFood();
+			snake.setSpeed(25);
+			Random random = new Random();
+			if(random.nextInt(100)+1 <= 30) {
+				speedfood.setLocation(ground == null ? speedfood.getNew() : ground
+						.getFreePoint());
+			}
+			else {
+				food.setLocation(ground == null ? food.getNew() : ground
+					.getFreePoint());
+			}
+			
 		}
 		if (snake.isEatBody())
 			try {
@@ -200,6 +227,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 		if (gameInfoLabel != null)
 			gameInfoLabel.setText(getNewInfo());
 	}
+	
 
 	/**
 	 * 开始一个新游戏
@@ -448,6 +476,13 @@ public class Controller extends KeyAdapter implements SnakeListener {
 		GameOptionPanel.updatehighscore();
 		System.out.println(String.valueOf(Global.score));
 		System.out.println("吃到食物!");
+	}
+	
+	public void snakeEatSpeedFood() {
+		Global.score = Global.score + 20;
+		GameOptionPanel.updatescore();
+		System.out.println(String.valueOf(Global.score));
+		System.out.println("牛逼!");
 	}
 	
 	public void updatescore() {

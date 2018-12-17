@@ -165,6 +165,14 @@ public class Snake {
 		for (SnakeListener l : listeners)
 			l.snakeEatFood();
 	}
+	
+	public void eatSpeedFood() {
+		/* 把上一次移动拿掉的节点再加上 */
+		body.addLast(tail.getLocation());
+		/* 触发SnakeListener 的 snakeEatFood 事件 */
+		for (SnakeListener l : listeners)
+			l.snakeEatSpeedFood();
+	}
 
 	/**
 	 * 改变方向
