@@ -63,6 +63,7 @@ public class GamePanel extends JPanel {
 		}
 		if (og != null) {
 			GameOptionPanel.updatescore();
+			GameOptionPanel.updatehighscore();
 			og.setColor(backgroundColor);
 			og.fillRect(0, 0, Global.WIDTH * Global.CELL_WIDTH, Global.HEIGHT
 					* Global.CELL_HEIGHT);

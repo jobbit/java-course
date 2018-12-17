@@ -3,6 +3,16 @@ package cn.itcast.snake.controller;
 import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -161,10 +171,20 @@ public class Controller extends KeyAdapter implements SnakeListener {
 		}/* 如果吃到食物, 就肯定不会吃到石头 */
 		else if (ground != null && ground.isSnakeEatRock(snake)) {
 			/* 如果吃到的是石头, 或吃到自己的身体, 就让蛇死掉 */
-			stopGame();
+			try {
+				stopGame();
+			} catch (FileNotFoundException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 		}
 		if (snake.isEatBody())
-			stopGame();
+			try {
+				stopGame();
+			} catch (FileNotFoundException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			}
 		if (gamePanel != null)
 			gamePanel.redisplay(ground, snake, food);
 		/* 更新提示 */
@@ -176,7 +196,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	 * 开始一个新游戏
 	 */
 	public void newGame() {
-
+		
 		if (ground != null) {
 			switch (map) {
 			case 2:
@@ -189,7 +209,7 @@ public class Controller extends KeyAdapter implements SnakeListener {
 			}
 		}
 		playing = true;
-
+		Global.score=0;
 		snake.reNew();
 		for (GameListener l : listeners)
 			l.gameStart();
@@ -198,14 +218,74 @@ public class Controller extends KeyAdapter implements SnakeListener {
 	/**
 	 * 结束游戏
 	 */
-	public void stopGame() {
+	public void stopGame() throws FileNotFoundException {
 		if (playing) {
 			playing = false;
+			File file = new File("D:/HighScore.txt");
+			int i=0;
+			if(!file.exists()){
+				try {
+				file.createNewFile();
+				writeDataToFile(file,0);
+				} catch (IOException e) {
+				e.printStackTrace();
+				}
+				}
+			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String s=null;
+			try {
+				while((s = reader.readLine())!=null){
+				String[] stuInfo = s.split(",");
+				i =Integer.valueOf(stuInfo[0]);
+				}
+			} catch (NumberFormatException e) {
+				// TODO 自动生成的 catch 块
+				e.printStackTrace();
+			} catch (IOException f) {
+				// TODO 自动生成的 catch 块
+				f.printStackTrace();
+			}
+			if(Global.score>=i){
+				FileWriter fileWriter = null;
+				try {
+					fileWriter = new FileWriter(file);
+				} catch (IOException e1) {
+					// TODO 自动生成的 catch 块
+					e1.printStackTrace();
+				}
+	            try {
+					fileWriter.write("");
+				} catch (IOException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+	            try {
+					fileWriter.flush();
+				} catch (IOException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+	            try {
+					fileWriter.close();
+				} catch (IOException e) {
+					// TODO 自动生成的 catch 块
+					e.printStackTrace();
+				}
+				writeDataToFile(file,Global.score);
+			}
+			System.out.println("本局分："+Global.score);
+			System.out.println("最高分："+i);
 			snake.dead();
 			for (GameListener l : listeners)
 				l.gameOver();
 		}
 	}
+
+	private static void writeDataToFile(File file,int i) throws FileNotFoundException {
+		PrintWriter out = new PrintWriter(new FileOutputStream(file, true));
+		out.println(i);
+		out.close();
+		}
 
 	/**
 	 * 暂停游戏

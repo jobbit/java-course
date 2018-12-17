@@ -1,6 +1,14 @@
 package cn.itcast.snake.game;
 
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -64,7 +72,7 @@ public class GameOptionPanel extends JPanel {
 	 */
 	
 	final static JSeparator separator_2 = new JSeparator();
-
+	final static JSeparator separator_3 = new JSeparator();
 	public GameOptionPanel() {
 		
 		
@@ -164,6 +172,10 @@ public class GameOptionPanel extends JPanel {
 		separator_2.setBounds(302, 10, 140, 165);
 		add(separator_2);
 
+		separator_3.setOrientation(SwingConstants.VERTICAL);
+		separator_3.setBounds(302, 40, 140, 165);
+		add(separator_3);
+		
 		final JSeparator separator_5 = new JSeparator();
 		separator_5.setBounds(10, 70, 125, 95);
 		separator_2.add(separator_5);
@@ -193,6 +205,12 @@ public class GameOptionPanel extends JPanel {
 		label_score.setBounds(10, 10, 101, 15);
 		separator_2.add(label_score);
 		
+		final JLabel label_score1 = new JLabel();
+		label_score1.setFont(new Font("宋体", Font.PLAIN, 12));
+		label_score1.setText("最高分：");
+		label_score1.setBounds(10, 20, 101, 15);
+		separator_3.add(label_score1);
+		
 //		final JLabel label_logo = new JLabel(czbkIcon);
 //		label_logo.setBounds(10, 10, 125, 50);
 //		separator_2.add(label_logo);
@@ -213,23 +231,6 @@ public class GameOptionPanel extends JPanel {
 		button_default.setBounds(139, 6, 137, 23);
 		button_default.setFocusable(false);
 		separator_3.add(button_default);
-		
-//		final JLabel label_score1 = new JLabel();
-//		label_score1.setFont(new Font("宋体", Font.PLAIN, 12));
-//		label_score1.setText(String.valueOf(Global.score));
-//		label_score1.setBounds(80, 10, 101, 15);
-//		separator_2.add(label_score1);
-		
-		
-//		while(Global.scorecheck==1) {
-//			repaint();
-//			final JLabel label_score2 = new JLabel();
-//			label_score2.setFont(new Font("宋体", Font.PLAIN, 12));
-//			label_score2.setText(String.valueOf(Global.score));
-//			label_score2.setBounds(80, 10, 101, 15);
-//			separator_2.add(label_score1);
-//			Global.scorecheck=0;
-//		}
 
 	}
 	
@@ -240,6 +241,51 @@ public class GameOptionPanel extends JPanel {
 		label_score2.setBounds(80, 10, 101, 15);
 		separator_2.add(label_score2);
 	}
+	
+	final static JLabel label_score3 = new JLabel();
+	public static void updatehighscore() {
+		label_score3.setFont(new Font("宋体", Font.PLAIN, 12));
+		File file = new File("D:/HighScore.txt");
+		int i=0;
+		if(!file.exists()){
+			try {
+			file.createNewFile();
+			writeDataToFile(file,0);
+			} catch (IOException e) {
+			e.printStackTrace();
+			}
+			}
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+		} catch (FileNotFoundException e1) {
+			// TODO 自动生成的 catch 块
+			e1.printStackTrace();
+		}
+		String s=null;
+		try {
+			if((s = reader.readLine())!=null){
+			String[] stuInfo = s.split(",");
+			i =Integer.valueOf(stuInfo[0]);
+			}
+		} catch (NumberFormatException e) {
+			// TODO 自动生成的 catch 块
+			e.printStackTrace();
+		} catch (IOException f) {
+			// TODO 自动生成的 catch 块
+			f.printStackTrace();
+		}
+		label_score3.setText(String.valueOf(i));
+		label_score3.setBounds(80, 20, 101, 15);
+		separator_3.add(label_score3);
+	}
+	
+	private static void writeDataToFile(File file,int i) throws FileNotFoundException {
+		PrintWriter out = new PrintWriter(new FileOutputStream(file, true));
+		out.println(i);
+		out.close();
+		}
+
 	public JFrame getFrame() {
 		return frame;
 	}
